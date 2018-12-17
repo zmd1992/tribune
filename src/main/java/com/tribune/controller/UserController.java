@@ -2,14 +2,17 @@ package com.tribune.controller;
 
 import com.tribune.pojo.User;
 import com.tribune.service.UserService;
-import com.tribune.service.impl.UserServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.support.AbstractMultipartHttpServletRequest;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -19,8 +22,38 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
+    private static Logger logger= LoggerFactory.getLogger(UserController.class);
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
+
+    @RequestMapping(value = "/u1")
+    public String user(HttpServletRequest request, Model model) {
+        return "addUser";
+
+    }
+
+    /**
+     * 插入用户
+     *
+     * @return
+     */
+    @RequestMapping(value = "/insert")
+    public String addUser(HttpServletRequest request, Model model) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String company = request.getParameter("company");
+        String sex = request.getParameter("sex");
+        String age = request.getParameter("age");
+        User user = new User();
+        user.setUserName(username);
+        user.setPassword(password);
+        user.setCompany(company);
+        user.setAge(age);
+        user.setSex(sex);
+        userService.addUser(user);
+        return "/addUse";
+
+    }
 
     /*
      *根据id查询

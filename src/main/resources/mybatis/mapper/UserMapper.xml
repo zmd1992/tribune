@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tribune.mapper.UserMapper">
+    <resultMap id="baseResultMap" type="com.tribune.pojo.User">
+        <id column="id" property="id"/>
+        <result column="username" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="company" property="company"/>
+        <result column="age" property="age" />
+        <result column="sex" property="sex" />
+    </resultMap>
+    <sql id="cloumnList">
+        username,passord,company,age,sex
+    </sql>
+    <select id="findById" resultType="com.tribune.pojo.User">
+        select * from user by id=#{id};
+    </select>
+    <insert id="insertUser" parameterType="com.tribune.pojo.User">
+        insert into user (id,username,password,company,age,sex)values(#{id},#{userName},#{password},#{company},#{age},#{sex});
+    </insert>
+
+</mapper>

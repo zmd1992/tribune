@@ -8,14 +8,14 @@ public class User {
     private Integer id;
     private String userName;
     private String password;
-    private Integer sex;
-    private Integer age;
+    private String sex;
+    private String age;
     private String company;
 
     public User() {
     }
 
-    public User(Integer id, String userName, String password, Integer sex, Integer age, String company) {
+    public User(Integer id, String userName, String password, String sex, String age, String company) {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -48,19 +48,19 @@ public class User {
         this.password = password;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
-    public Integer getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(String age) {
         this.age = age;
     }
 

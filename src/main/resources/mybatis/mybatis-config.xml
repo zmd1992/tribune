@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <settings>
-        <setting name="cacheEnable" value="true"/>
         <setting name="defaultStatementTimeout" value="3000"/>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-        <!--代理-->
-        <setting name="proxyFatory" value="CGLIB"/>
         <setting name="lazyLoadingEnabled" value="true"/>
     </settings>
+    <typeAliases>
+        <typeAlias type="com.tribune.pojo.User" alias="User"/>
+    </typeAliases>
     <!--分页插件-->
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageInterceptor">
