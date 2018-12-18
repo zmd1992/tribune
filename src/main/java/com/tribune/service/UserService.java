@@ -10,5 +10,10 @@ public interface UserService {
      */
     public int addUser(User user);
 
-    public User findById(Integer id);
+    /**
+     * 根据用户名查询密码
+     * @param username
+     * @return
+     */
+    public User findUserByUsername(String username);
 }

@@ -3,6 +3,9 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
+    <!--classPathEntry:数据库的jdbc驱动jar包地址-->
+    <classPathEntry
+            location="C:\Users\lenovo\.m2\repository\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar"/>
     <context id="testTables" targetRuntime="MyBatis3">
         <commentGenerator>
             <!--是否去除自动生成的注释true：是，alse：否-->
@@ -10,22 +13,22 @@
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码-->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3006/ssm?serverTimezone=UTC" userId="root"
+                        connectionURL="jdbc:mysql://localhost:3006/tribune?serverTimezone=UTC" userId="root"
                         password="123456">
         </jdbcConnection>
         <!--默认false，把jdbc decimal和numeric类型解析为Integer,为true时把JDBC DECIMAL 和numeric类型解析为java.math.BigDecimal-->
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
-        <!--targetProject：生成po类的位置-->
-        <javaModelGenerator targetPackage="com.tribune.pojo" targetProject=".\src">
+        <!--targetProject：自动生成代码的位置-->
+        <javaModelGenerator targetPackage="com.tribune.generator" targetProject="src/main/java">
             <!--enableSubPackages:是否让schema作为包的后缀-->
             <property name="enbaleSubPackages" value="false"/>
             <!--从数据库返回的值被清理前后的空格-->
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!--targetProject:mapper映射文件生成的位置-->
-        <sqlMapGenerator targetPackage="com.tribune.mapper" targetProject=".\src">
+        <sqlMapGenerator targetPackage="." targetProject="src/main/resources/mybatis/mapper">
             <!--enableSubPackges:是否让shema作为包的后缀-->
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
@@ -33,13 +36,15 @@
         <javaClientGenerator
                 type="XMLMAPPER"
                 targetPackage="com.tribune.mapper"
-                targetProject="./src">
+                targetProject="src/main/java">
             <!--enableSubPackages:是否让schema作为包的后缀-->
             <property name="enableSubPackages"
                       value="false"/>
         </javaClientGenerator>
-        <!--指定数据库表-->
-        <table schema="" tableName="user">
+        <!--tableName：用于生成代码的数据库表；domainObjectName:对应数据表的javaBean类名-->
+        <table schema="" tableName="param" domainObjectName="Param" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
         </table>
     </context>
 </generatorConfiguration>

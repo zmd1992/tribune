@@ -18,13 +18,14 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
-    public User findById(Integer id) {
-        return userMapper.findById(id);
-    }
-
     @Override
     public int addUser(User user) {
 
         return userMapper.insertUser(user);
+    }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userMapper.findUserByUsername(username);
     }
 }

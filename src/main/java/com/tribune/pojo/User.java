@@ -1,5 +1,10 @@
 package com.tribune.pojo;
 
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
+
+import java.util.Date;
+
+
 /**
  * created by zhangmengdan
  * created at 2018/12/16 23:02
@@ -9,19 +14,20 @@ public class User {
     private String userName;
     private String password;
     private String sex;
-    private String age;
-    private String company;
+    private Date birthday;
+    private String email;
+
 
     public User() {
     }
 
-    public User(Integer id, String userName, String password, String sex, String age, String company) {
+    public User(Integer id, String userName, String password, String sex, Date birthday, String email) {
         this.id = id;
         this.userName = userName;
         this.password = password;
-        this.sex = sex;
-        this.age = age;
-        this.company = company;
+        this.sex=sex;
+        this.birthday = birthday;
+        this.email = email;
     }
 
     public Integer getId() {
@@ -48,6 +54,22 @@ public class User {
         this.password = password;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getSex() {
         return sex;
     }
@@ -56,19 +78,15 @@ public class User {
         this.sex = sex;
     }
 
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

@@ -6,18 +6,19 @@
         <id column="id" property="id"/>
         <result column="username" property="userName"/>
         <result column="password" property="password"/>
-        <result column="company" property="company"/>
-        <result column="age" property="age" />
-        <result column="sex" property="sex" />
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday" />
+        <result column="email" property="email"/>
     </resultMap>
     <sql id="cloumnList">
-        username,passord,company,age,sex
+        username,passord,sex,birthday,email
     </sql>
-    <select id="findById" resultType="com.tribune.pojo.User">
-        select * from user by id=#{id};
+    <select id="findUserByUsername" resultType="com.tribune.pojo.User">
+        select * from user where username=#{userName};
     </select>
     <insert id="insertUser" parameterType="com.tribune.pojo.User">
-        insert into user (id,username,password,company,age,sex)values(#{id},#{userName},#{password},#{company},#{age},#{sex});
+        insert into user (username,password,sex,birthday,email)
+                    values (#{userName},#{password},#{sex},#{birthday},#{email});
     </insert>
 
 </mapper>
