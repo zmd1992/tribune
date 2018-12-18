@@ -9,8 +9,10 @@
        http://www.springframework.org/schema/mvc
           http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!--启动的一些注解-->
-    <context:annotation-config/>
+    <!--自动将控制器加载到bean-->
+    <context:component-scan base-package="com.tribune.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
     <!--spring 来扫描指定包下的类，并注册被@Component,@Controller,@Service,@Repository等注解-->
     <!--注册驱动-->
     <mvc:annotation-driven>
@@ -40,10 +42,7 @@
     </mvc:annotation-driven>
     <!--静态资源默认servlet配置-->
     <mvc:default-servlet-handler/>
-    <!--自动将控制器加载到bean-->
-    <context:component-scan base-package="com.tribune.controller">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
+
     <mvc:resources mapping="*" location="css,image,js"/>
     <!--视图解析器-->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

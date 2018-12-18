@@ -15,8 +15,6 @@ import javax.annotation.Resource;
  **/
 @Service("userService")
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private SqlSessionTemplate sqlSessionTemplate;
     @Resource
     private UserMapper userMapper;
 

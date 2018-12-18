@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/user")
 public class UserController {
     private static Logger logger= LoggerFactory.getLogger(UserController.class);
-    @Autowired
+    @Resource
     private UserService userService;
 
     @RequestMapping(value = "/u1")
@@ -51,7 +52,7 @@ public class UserController {
         user.setAge(age);
         user.setSex(sex);
         userService.addUser(user);
-        return "/addUse";
+        return "addUserSuccess";
 
     }
 
