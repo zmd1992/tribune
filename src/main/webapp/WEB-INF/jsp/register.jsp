@@ -2,20 +2,25 @@
 <html>
 <head>
     <title>注册页面</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <form action="/user/registerUser" method="post">
     <table border="0" align="center">
         <tr>
-            <th>用户名：</th>
+            <th>用户头像:</th>
+            <th><input type="file" name="headImg"/> </th>
+        </tr>
+        <tr>
+            <th>用&nbsp;户&nbsp;名：</th>
             <th><input type="text" name="username"></th>
         </tr>
         <tr>
-            <th>密&nbsp;&nbsp;&nbsp;码：</th>
+            <th>密&nbsp;&nbsp;&nbsp;&nbsp;码：</th>
             <th><input type="password" name="password"></th>
         </tr>
         <tr>
-        <th>性&nbsp;&nbsp;&nbsp;别：</th>
+        <th>性&nbsp;&nbsp;&nbsp;&nbsp;别：</th>
         <th><input type="radio" name="sex" value="男" checked="checked">男&nbsp;
             <input type="radio" name="sex" value="女">女
         </th>

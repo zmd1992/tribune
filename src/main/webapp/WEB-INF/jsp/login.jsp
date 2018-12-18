@@ -6,7 +6,7 @@
 </head>
 <body>
 <form action="/user/login" method="post">
-    <table id="tb" >
+    <table id="tb"  align="center" >
         <tr >
             <th>用户名：</th>
             <th><input type="text" name="username"></th>

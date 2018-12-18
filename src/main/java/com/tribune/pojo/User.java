@@ -2,6 +2,7 @@ package com.tribune.pojo;
 
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
+import java.sql.Blob;
 import java.util.Date;
 
 
@@ -16,18 +17,20 @@ public class User {
     private String sex;
     private Date birthday;
     private String email;
+    private String headImg;
 
 
     public User() {
     }
 
-    public User(Integer id, String userName, String password, String sex, Date birthday, String email) {
+    public User(Integer id, String userName, String password, String sex, Date birthday, String email,String headImg) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.sex=sex;
         this.birthday = birthday;
         this.email = email;
+        this.headImg=headImg;
     }
 
     public Integer getId() {
@@ -78,6 +81,14 @@ public class User {
         this.sex = sex;
     }
 
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -85,8 +96,9 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", sex='" + sex + '\'' +
-                ", birthday='" + birthday + '\'' +
+                ", birthday=" + birthday +
                 ", email='" + email + '\'' +
+                ", headImg=" + headImg +
                 '}';
     }
 }

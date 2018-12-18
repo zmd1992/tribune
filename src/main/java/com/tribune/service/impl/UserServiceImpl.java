@@ -28,4 +28,9 @@ public class UserServiceImpl implements UserService {
     public User findUserByUsername(String username) {
         return userMapper.findUserByUsername(username);
     }
+
+    @Override
+    public int modifyUserByUserId(Integer id) {
+        return 0;
+    }
 }

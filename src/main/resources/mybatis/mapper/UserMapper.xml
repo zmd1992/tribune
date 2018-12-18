@@ -7,18 +7,29 @@
         <result column="username" property="userName"/>
         <result column="password" property="password"/>
         <result column="sex" property="sex"/>
-        <result column="birthday" property="birthday" />
+        <result column="birthday" property="birthday"/>
         <result column="email" property="email"/>
+        <result column="head_img" property="headImg"/>
     </resultMap>
     <sql id="cloumnList">
-        username,passord,sex,birthday,email
+        username,passord,sex,birthday,email,head_img
     </sql>
     <select id="findUserByUsername" resultType="com.tribune.pojo.User">
         select * from user where username=#{userName};
     </select>
     <insert id="insertUser" parameterType="com.tribune.pojo.User">
-        insert into user (username,password,sex,birthday,email)
-                    values (#{userName},#{password},#{sex},#{birthday},#{email});
+        insert into user (username,password,sex,birthday,email,header_img)
+                    values (#{userName},#{password},#{sex},#{birthday},#{email},#{headImg});
     </insert>
+    <update id="updateUserById" parameterType="com.tribune.pojo.User">
+        update user set
+        <if test="headerImg!=null">
+            header_img=#{headImg}
+        </if>
+        <if test="email!=null">
+            email=#{email}
+        </if>
+        where id=#{id}
+    </update>
 
 </mapper>

@@ -16,4 +16,12 @@ public interface UserService {
      * @return
      */
     public User findUserByUsername(String username);
+
+    /**
+     * 通过ID修改用户信息
+     * @param id
+     * @return
+     */
+    public int modifyUserByUserId(Integer id);
+
 }
