@@ -1,5 +1,6 @@
 package com.tribune.controller;
 
+import com.alibaba.druid.sql.dialect.mysql.ast.statement.MySqlShowGrantsStatement;
 import com.tribune.pojo.MyGarden;
 import com.tribune.pojo.User;
 import com.tribune.service.MyGardenService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -82,4 +85,19 @@ public class MyGardenController {
         return "/my/totalStation";
     }
 
+    /**
+     * 删除我发布的内容
+     *
+     * @return
+     */
+    @RequestMapping(value = "removeMyGardenContent")
+    public String removeMyGardenContent(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        MyGarden myGarden = new MyGarden();
+        myGarden.setCreatedPersonId(user.getId());
+        String id = request.getParameter("id");
+        myGarden.setId(Integer.valueOf(id));
+        myGardenService.removeMyGardenContent(myGarden);
+        return "/my/myGarden";
+    }
 }

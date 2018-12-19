@@ -17,4 +17,17 @@ public interface MyGardenService {
      * @return
      */
     public List<MyGarden> findTotalStationContent();
+    /**
+     * 删除我发布的内容
+     * @param
+     * @return
+     */
+    public int removeMyGardenContent(MyGarden myGarden);
+
+    /**
+     * 根据ID查询发布内容
+     * @param id
+     * @return
+     */
+    public MyGarden findMyGardenContentById(Integer id);
 }

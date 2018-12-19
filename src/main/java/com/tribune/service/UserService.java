@@ -1,5 +1,6 @@
 package com.tribune.service;
 
+import com.tribune.pojo.MyGarden;
 import com.tribune.pojo.User;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,7 @@ public interface UserService {
      * @return
      */
     public List<User> findUserList();
+
+
 
 }

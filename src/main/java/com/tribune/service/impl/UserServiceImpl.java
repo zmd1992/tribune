@@ -1,6 +1,7 @@
 package com.tribune.service.impl;
 
 import com.tribune.mapper.UserMapper;
+import com.tribune.pojo.MyGarden;
 import com.tribune.pojo.User;
 import com.tribune.service.UserService;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * created by zhangmengdan
  * created at 2018/12/16 23:12
+ * 接口实现类
  **/
 @Service("userService")
 public class UserServiceImpl implements UserService {

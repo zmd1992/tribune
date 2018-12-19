@@ -9,12 +9,20 @@
         <result column="created_personId" property="createdPersonId"/>
     </resultMap>
     <sql id="baseSqlColumn">
-        content,created_at,created_person_id
+        id,content,created_at,created_person_id
     </sql>
     <insert id="addMyGradeContent" parameterType="com.tribune.pojo.MyGarden">
         insert into my_garden (content,created_at,created_person_id)values(#{content},#{createdAt},#{createdPersonId})
     </insert>
     <select id="selectMyGardenAllContent" parameterType="com.tribune.pojo.MyGarden" resultMap="baseResultMap">
         select<include refid="baseSqlColumn"/>from my_garden order by created_at desc;
+    </select>
+    <delete id="deleteMyGardenContent" parameterType="com.tribune.pojo.MyGarden">
+        delete from  my_garden  where id=#{id} and created_person_id=#{createdPersonId};
+    </delete>
+    <select id="selectMyGardenContentById" parameterType="com.tribune.pojo.MyGarden" resultMap="baseResultMap">
+        select
+        <include refid="baseSqlColumn"/>
+        from my_garden where id = #{id}
     </select>
 </mapper>

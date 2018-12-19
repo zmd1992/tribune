@@ -22,4 +22,14 @@ public class MyGardenServiceImpl implements MyGardenService {
     public List<MyGarden> findTotalStationContent() {
         return myGardenMapper.selectMyGardenAllContent();
     }
+
+    @Override
+    public int removeMyGardenContent(MyGarden myGarden) {
+        return myGardenMapper.deleteMyGardenContent(myGarden);
+    }
+
+    @Override
+    public MyGarden findMyGardenContentById(Integer id) {
+        return myGardenMapper.selectMyGardenContentById(id);
+    }
 }

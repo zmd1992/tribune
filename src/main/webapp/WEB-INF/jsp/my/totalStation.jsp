@@ -15,12 +15,13 @@
                         ${userList.userName}:
                 </td>
                 <td id="tdStation2">${contentList.content}
-                    <img src="/image/button/delete.jpg" href="" id="img"></td>
+                    <a href="/myGarden/removeMyGardenContent?id=${contentList.id}">${contentList.id}删除</a>
+                </td>
                 <td id="tdStation3">
                         ${contentList.createdAt}
                 </td>
                 <td id="tdStation4">
-                    <a>回应</a>
+                    <a href="">回应</a>
                 </td>
             </tr>
         </c:forEach>

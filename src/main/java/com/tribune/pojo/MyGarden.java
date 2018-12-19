@@ -6,12 +6,12 @@ public class MyGarden {
     private Integer id;
     private String content;
     private Date createdAt;
-    private int createdPersonId;
+    private Integer createdPersonId;
 
     public MyGarden() {
     }
 
-    public MyGarden(Integer id, String content, Date createdAt, int createdPersonId) {
+    public MyGarden(Integer id, String content, Date createdAt, Integer createdPersonId) {
         this.id = id;
         this.content = content;
         this.createdAt = createdAt;
@@ -42,11 +42,11 @@ public class MyGarden {
         this.createdAt = createdAt;
     }
 
-    public int getCreatedPersonId() {
+    public Integer getCreatedPersonId() {
         return createdPersonId;
     }
 
-    public void setCreatedPersonId(int createdPersonId) {
+    public void setCreatedPersonId(Integer createdPersonId) {
         this.createdPersonId = createdPersonId;
     }
 
