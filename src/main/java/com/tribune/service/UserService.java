@@ -3,6 +3,8 @@ package com.tribune.service;
 import com.tribune.pojo.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 public interface UserService {
     /**
      * 添加用户
@@ -23,5 +25,11 @@ public interface UserService {
      * @return
      */
     public int modifyUserByUserId(Integer id);
+
+    /**
+     * 查询用户列表
+     * @return
+     */
+    public List<User> findUserList();
 
 }

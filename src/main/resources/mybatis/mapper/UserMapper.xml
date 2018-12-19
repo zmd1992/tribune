@@ -3,33 +3,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tribune.mapper.UserMapper">
     <resultMap id="baseResultMap" type="com.tribune.pojo.User">
-        <id column="id" property="id"/>
-        <result column="username" property="userName"/>
-        <result column="password" property="password"/>
-        <result column="sex" property="sex"/>
-        <result column="birthday" property="birthday"/>
-        <result column="email" property="email"/>
-        <result column="head_img" property="headImg"/>
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="username" property="userName" jdbcType="VARCHAR"/>
+        <result column="password" property="password"  jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="birthday" property="birthday" jdbcType="DATE"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="head_img" property="headImg" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="cloumnList">
-        username,passord,sex,birthday,email,head_img
+        username,password,sex,birthday,email,head_img
     </sql>
     <select id="findUserByUsername" resultType="com.tribune.pojo.User">
         select * from user where username=#{userName};
     </select>
     <insert id="insertUser" parameterType="com.tribune.pojo.User">
-        insert into user (username,password,sex,birthday,email,header_img)
+        insert into user (username,password,sex,birthday,email,head_img)
                     values (#{userName},#{password},#{sex},#{birthday},#{email},#{headImg});
     </insert>
     <update id="updateUserById" parameterType="com.tribune.pojo.User">
         update user set
-        <if test="headerImg!=null">
-            header_img=#{headImg}
-        </if>
-        <if test="email!=null">
-            email=#{email}
-        </if>
+            email = #{email,jdbcType=VARCHAR}
         where id=#{id}
     </update>
+    <select id="selectUserList" parameterType="com.tribune.pojo.User" resultMap="baseResultMap">
+        select <include refid="cloumnList"/> from user;
+    </select>
 
 </mapper>

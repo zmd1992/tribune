@@ -1,6 +1,5 @@
 package com.tribune.controller;
 
-import com.mysql.cj.Session;
 import com.tribune.pojo.User;
 import com.tribune.service.UserService;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 /**
  * created by zhangmengdan
  * created at 2018/12/16 23:21
@@ -34,7 +32,7 @@ public class UserController {
      */
     @RequestMapping(value = "registerPage")
     public String toRegisterPage() {
-        return "register";
+        return "user/register";
     }
 
     /**
@@ -62,13 +60,13 @@ public class UserController {
         user.setBirthday(birthdayDate);
         user.setEmail(email);
         userService.addUser(user);
-        return "login";
+        return "user/login";
 
     }
 
     @RequestMapping(value = "/loginPage")
     public String toLoginPage() {
-        return "login";
+        return "user/login";
     }
 
     /*
@@ -91,6 +89,15 @@ public class UserController {
     }
 
     /**
+     * 跳到我的资料页面
+     * @return
+     */
+    @RequestMapping(value = "/myInfoPage")
+    public String toMyInfoPage(){
+        return "/my/myInfo";
+    }
+
+    /**
      * 处理我的资料页面
      *
      * @param request
@@ -102,7 +109,7 @@ public class UserController {
         User loginUser = (User) request.getSession().getAttribute("user");
         User user = userService.findUserByUsername(loginUser.getUserName());
         model.addAttribute("user", user);
-        return "myInfo";
+        return "my/myInfo";
     }
 
     /**
@@ -111,7 +118,7 @@ public class UserController {
      */
     @RequestMapping(value = "toModifyMyInfoPage")
     public String modifyUser() {
-        return "modifyMyInfo";
+        return "my/modifyMyInfo";
     }
 
     /**
@@ -121,10 +128,11 @@ public class UserController {
      * @return
      */
     @RequestMapping("/doModifyUser")
-    public String doModifyUser(HttpServletRequest request) {
+    public String doModifyUser(HttpServletRequest request,Model model) {
         User loginUser = (User) request.getSession().getAttribute("user");
         User user = userService.findUserByUsername(loginUser.getUserName());
+        model.addAttribute("user",user);
         userService.modifyUserByUserId(user.getId());
-        return "myInfo";
+        return "my/myInfo";
     }
 }

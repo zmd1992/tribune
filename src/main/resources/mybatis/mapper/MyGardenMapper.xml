@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tribune.mapper.MyGardenMapper">
+    <resultMap id="baseResultMap" type="com.tribune.pojo.MyGarden">
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="created_personId" property="createdPersonId"/>
+    </resultMap>
+    <sql id="baseSqlColumn">
+        content,created_at,created_person_id
+    </sql>
+    <insert id="addMyGradeContent" parameterType="com.tribune.pojo.MyGarden">
+        insert into my_garden (content,created_at,created_person_id)values(#{content},#{createdAt},#{createdPersonId})
+    </insert>
+    <select id="selectMyGardenAllContent" parameterType="com.tribune.pojo.MyGarden" resultMap="baseResultMap">
+        select<include refid="baseSqlColumn"/>from my_garden order by created_at desc;
+    </select>
+</mapper>

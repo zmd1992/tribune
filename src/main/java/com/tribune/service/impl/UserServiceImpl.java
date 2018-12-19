@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * created by zhangmengdan
@@ -31,6 +32,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int modifyUserByUserId(Integer id) {
-        return 0;
+        return userMapper.updateUserById(id);
+    }
+
+    @Override
+    public List<User> findUserList() {
+        return userMapper.selectUserList();
     }
 }
