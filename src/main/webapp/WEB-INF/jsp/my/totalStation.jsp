@@ -11,16 +11,17 @@
     <c:forEach var="contentList" items="${gardenList}">
         <c:forEach var="userList" items="${userList}">
             <tr>
-                <td id="tdStation">
+                <td align="right">
                         ${userList.userName}:
                 </td>
-                <td id="tdStation2">${contentList.content}
+                <td align="left">
+                        ${contentList.content}
                     <a href="/myGarden/removeMyGardenContent?id=${contentList.id}">${contentList.id}删除</a>
+                </td align=left>
+                <td align="left">
+                        ${createdAtStr}
                 </td>
-                <td id="tdStation3">
-                        ${contentList.createdAt}
-                </td>
-                <td id="tdStation4">
+                <td align="center">
                     <a href="">回应</a>
                 </td>
             </tr>

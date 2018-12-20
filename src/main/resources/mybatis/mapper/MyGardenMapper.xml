@@ -6,7 +6,7 @@
         <id column="id" property="id"/>
         <result column="content" property="content"/>
         <result column="created_at" property="createdAt"/>
-        <result column="created_personId" property="createdPersonId"/>
+        <result column="created_person_id" property="createdPersonId"/>
     </resultMap>
     <sql id="baseSqlColumn">
         id,content,created_at,created_person_id
@@ -20,9 +20,16 @@
     <delete id="deleteMyGardenContent" parameterType="com.tribune.pojo.MyGarden">
         delete from  my_garden  where id=#{id} and created_person_id=#{createdPersonId};
     </delete>
-    <select id="selectMyGardenContentById" parameterType="com.tribune.pojo.MyGarden" resultMap="baseResultMap">
+    <select id="selectMyGardenContentById" parameterType="java.util.List" resultMap="baseResultMap"
+            resultType="arraylist">
         select
         <include refid="baseSqlColumn"/>
-        from my_garden where id = #{id}
+        from my_garden where 1=1
+        <if test="list!=null and list.size>0">
+           and created_person_id in
+            <foreach collection="list" index="userIdList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
     </select>
 </mapper>

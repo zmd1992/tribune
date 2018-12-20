@@ -10,8 +10,6 @@
     border: 0;
     cellpadding: 0;
     cellspacing: 0;
-    width: 500px;
-    height: 500px;
 }
 
 a {
@@ -35,17 +33,9 @@ a {
     width: 20px;
     height: 20px;
 }
-#tdStation{
-    align:right;
-}
-#tdStation2{
-    align:left;
-}
-#tdStation3{
-    align:center;
-}
-#tdStation4{
-    align:center;
+#frame {
+    width: 500px;
+    height: 500px;
 }
 
 

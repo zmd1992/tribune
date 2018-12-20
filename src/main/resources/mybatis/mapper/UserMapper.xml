@@ -12,7 +12,7 @@
         <result column="head_img" property="headImg" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="cloumnList">
-        username,password,sex,birthday,email,head_img
+       id,username,password,sex,birthday,email,head_img
     </sql>
     <select id="findUserByUsername" resultType="com.tribune.pojo.User">
         select * from user where username=#{userName};

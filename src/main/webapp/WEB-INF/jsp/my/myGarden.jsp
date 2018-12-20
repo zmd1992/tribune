@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>我的园子</title>
@@ -46,7 +47,7 @@
     </form>
     <br/>
     <a>登录</a>&nbsp;&nbsp;<a>全站</a><br/>
-    <iframe id="frame" src="/myGarden/doTotalStation" scrolling="no"></iframe>
+    <iframe id="frame" src="/myGarden/doTotalStation"></iframe>
 </div>
 </body>
 </html>

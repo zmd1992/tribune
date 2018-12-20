@@ -25,9 +25,8 @@ public interface MyGardenService {
     public int removeMyGardenContent(MyGarden myGarden);
 
     /**
-     * 根据ID查询发布内容
-     * @param id
+     * 根据用户ID列表查询发布内容
      * @return
      */
-    public MyGarden findMyGardenContentById(Integer id);
+    public List<MyGarden> findMyGardenContentById(List<Integer> idList);
 }

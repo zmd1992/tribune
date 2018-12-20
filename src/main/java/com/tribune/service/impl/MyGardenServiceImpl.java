@@ -29,7 +29,7 @@ public class MyGardenServiceImpl implements MyGardenService {
     }
 
     @Override
-    public MyGarden findMyGardenContentById(Integer id) {
-        return myGardenMapper.selectMyGardenContentById(id);
+    public List<MyGarden> findMyGardenContentById(List<Integer> idList) {
+        return myGardenMapper.selectMyGardenContentById(idList);
     }
 }

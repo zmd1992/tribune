@@ -127,7 +127,7 @@ public class UserController {
      */
     @RequestMapping("/doMyInfo")
     public String doMyInfo(HttpServletRequest request, Model model) {
-        User user = (User) request.getSession().getAttribute("user");
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         User user = (User) request.getSession().getAttribute("user");
         String birthdayStr = DateUtils.dateFormatString(user.getBirthday());
         model.addAttribute("user", user);
         model.addAttribute("birthdayStr", birthdayStr);

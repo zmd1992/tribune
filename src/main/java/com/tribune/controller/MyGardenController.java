@@ -1,22 +1,18 @@
 package com.tribune.controller;
 
-import com.alibaba.druid.sql.dialect.mysql.ast.statement.MySqlShowGrantsStatement;
 import com.tribune.pojo.MyGarden;
 import com.tribune.pojo.User;
 import com.tribune.service.MyGardenService;
 import com.tribune.service.UserService;
 import com.tribune.util.DateUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -77,10 +73,18 @@ public class MyGardenController {
      * @return
      */
     @RequestMapping(value = "doTotalStation")
-    public String doTatalStation(HttpServletRequest request, Model model) {
+    public String doTatalStation(HttpServletRequest request, Model model) throws ParseException {
         List<User> userList = userService.findUserList();
+        List<Integer> userIdList = new ArrayList<>();
+        userList.forEach(x -> {
+            userIdList.add(x.getId());
+        });
         model.addAttribute("userList", userList);
-        List<MyGarden> gardenList = myGardenService.findTotalStationContent();
+        List<MyGarden> gardenList = myGardenService.findMyGardenContentById(userIdList);
+        gardenList.forEach(x -> {
+            String createdAtStr = DateUtils.dateFormatString(x.getCreatedAt());
+            model.addAttribute("createdAtStr", createdAtStr);
+        });
         model.addAttribute("gardenList", gardenList);
         return "/my/totalStation";
     }
