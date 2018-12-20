@@ -2,6 +2,7 @@ package com.tribune.controller;
 
 import com.tribune.pojo.User;
 import com.tribune.service.UserService;
+import com.tribune.util.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -84,7 +85,7 @@ public class UserController {
             User user = userService.findUserByUsername(username);
             model.addAttribute("user", user);
             request.getSession().setAttribute("user", user);
-            if (user.getPassword() != null&&!user.getPassword().equals("") && user.getPassword().equals(password)) {
+            if (user.getPassword() != null && !user.getPassword().equals("") && user.getPassword().equals(password)) {
                 modelAndView = new ModelAndView("pageHome");
             } else {
                 modelAndView = new ModelAndView("/user/checkUser");
@@ -126,9 +127,10 @@ public class UserController {
      */
     @RequestMapping("/doMyInfo")
     public String doMyInfo(HttpServletRequest request, Model model) {
-        User loginUser = (User) request.getSession().getAttribute("user");
-        User user = userService.findUserByUsername(loginUser.getUserName());
+        User user = (User) request.getSession().getAttribute("user");
+        String birthdayStr = DateUtils.dateFormatString(user.getBirthday());
         model.addAttribute("user", user);
+        model.addAttribute("birthdayStr", birthdayStr);
         return "my/myInfo";
     }
 

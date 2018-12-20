@@ -14,7 +14,7 @@
 </c:choose>
 <div id="BigDiv" align="center">
     <div id="userDiv">
-        ${user.userName}&nbsp;&nbsp;<a href="/myGarden/toMyGardenPage">我的论坛</a> &nbsp;&nbsp;<a href="/user/loginPage">退出</a>
+        <a href="/pageHome/toHome">${user.userName}</a> &nbsp;&nbsp;<a href="/myGarden/toMyGardenPage">我的论坛</a> &nbsp;&nbsp;<a href="/user/loginPage">退出</a>
     </div>
     <table id="tb2" align="center">
         <caption>我的资料</caption>
@@ -35,7 +35,7 @@
         </tr>
         <tr>
             <td>出生年月：</td>
-            <td>${user.birthday}</td>
+            <td>${birthdayStr}</td>
         </tr>
         <tr>
             <td colspan="2">
