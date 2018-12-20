@@ -14,7 +14,8 @@
             </tr>
             <tr>
                 <th>密&nbsp;&nbsp;码：</th>
-                <th><input type="password" name="password"></th>
+                <th><input type="password" name="password">
+                </th>
             </tr>
             <tr>
                 <th colspan="2"><input type="submit" value="登录"> &nbsp;&nbsp;<a href="/user/registerPage">注册</a></th>

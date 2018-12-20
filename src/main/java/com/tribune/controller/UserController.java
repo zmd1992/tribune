@@ -7,12 +7,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 /**
  * created by zhangmengdan
  * created at 2018/12/16 23:21
@@ -73,27 +76,44 @@ public class UserController {
      *处理登录页面
      */
     @RequestMapping(value = "/login")
-    public String login(HttpServletRequest request, Model model) {
+    public ModelAndView login(HttpServletRequest request, Model model) {
         String username = request.getParameter("username");
-        if (username != null) {
+        String password = request.getParameter("password");
+        ModelAndView modelAndView = null;
+        if (username != null && !username.equals("")) {
             User user = userService.findUserByUsername(username);
             model.addAttribute("user", user);
             request.getSession().setAttribute("user", user);
-            if (user.getPassword() != null) {
-                return "pageHome";
+            if (user.getPassword() != null&&!user.getPassword().equals("") && user.getPassword().equals(password)) {
+                modelAndView = new ModelAndView("pageHome");
             } else {
-                return ("用户名或密码错误，请重新输入");
+                modelAndView = new ModelAndView("/user/checkUser");
+            }
+        } else if (this.paramIsNull(new String[]{username, password})) {
+            modelAndView = new ModelAndView("/user/userIsNotNull");
+        }
+        return modelAndView;
+    }
+
+    /**
+     * 验证用户名和密码是否为空
+     */
+    public boolean paramIsNull(String[] params) {
+        for (String param : params) {
+            if (param == "" || param == null) {
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     /**
      * 跳到我的资料页面
+     *
      * @return
      */
     @RequestMapping(value = "/myInfoPage")
-    public String toMyInfoPage(){
+    public String toMyInfoPage() {
         return "/my/myInfo";
     }
 
@@ -114,6 +134,7 @@ public class UserController {
 
     /**
      * 跳到修改资料页面
+     *
      * @return
      */
     @RequestMapping(value = "toModifyMyInfoPage")
@@ -128,10 +149,10 @@ public class UserController {
      * @return
      */
     @RequestMapping("/doModifyUser")
-    public String doModifyUser(HttpServletRequest request,Model model) {
+    public String doModifyUser(HttpServletRequest request, Model model) {
         User loginUser = (User) request.getSession().getAttribute("user");
         User user = userService.findUserByUsername(loginUser.getUserName());
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         userService.modifyUserByUserId(user.getId());
         return "my/myInfo";
     }
