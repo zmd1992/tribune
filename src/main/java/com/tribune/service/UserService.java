@@ -1,20 +1,20 @@
 package com.tribune.service;
 
-import com.tribune.pojo.MyGarden;
 import com.tribune.pojo.User;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 public interface UserService {
     /**
      * 添加用户
+     *
      * @param user
      */
     public int addUser(User user);
 
     /**
      * 根据用户名查询密码
+     *
      * @param username
      * @return
      */
@@ -22,6 +22,7 @@ public interface UserService {
 
     /**
      * 通过ID修改用户信息
+     *
      * @param id
      * @return
      */
@@ -29,10 +30,19 @@ public interface UserService {
 
     /**
      * 查询用户列表
+     *
      * @return
      */
     public List<User> findUserList();
 
+    /**
+     * 根据用户ID集合查询用户
+     */
+    public List<User> findUserListByIds(List<Integer> ids);
+    /**
+     * 通过用户ID获取用户信息
+     */
+    public User findUserById(Integer id);
 
 
 }

@@ -14,4 +14,6 @@ public interface UserMapper {
     User findUserByUsername(String username);
     public int updateUserById(Integer id);
     public List<User> selectUserList();
+    public List<User> selectUserByIds(List<Integer> ids);
+    public User selectUserById(Integer id);
 }

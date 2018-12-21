@@ -9,4 +9,5 @@ public interface MyGardenMapper {
     public List<MyGarden> selectMyGardenAllContent();
     public int deleteMyGardenContent(MyGarden myGarden);
     public List<MyGarden> selectMyGardenContentById(List<Integer> idList);
+    public MyGarden selectMyGardenContentByIds(MyGarden myGarden);
 }

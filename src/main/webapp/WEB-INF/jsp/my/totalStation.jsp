@@ -8,8 +8,8 @@
 </head>
 <body>
 <table id="tbStation">
-    <c:forEach var="contentList" items="${gardenList}">
-        <c:forEach var="userList" items="${userList}">
+    <c:forEach var="userList" items="${userListByIds}">
+        <c:forEach var="contentList" items="${list}">
             <tr>
                 <td align="right">
                         ${userList.userName}:

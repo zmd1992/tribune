@@ -26,10 +26,21 @@
         <include refid="baseSqlColumn"/>
         from my_garden where 1=1
         <if test="list!=null and list.size>0">
-           and created_person_id in
+            and created_person_id in
             <foreach collection="list" index="userIdList" item="item" open="(" separator="," close=")">
                 #{item}
             </foreach>
         </if>
+        <if test="list!=null and list.size>0">
+            and created_person_id in
+            <foreach collection="list" index="createdPersonIdList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+    <select id="selectMyGardenContentByIds" parameterType="com.tribune.pojo.MyGarden" resultMap="baseResultMap">
+        select
+        <include refid="baseSqlColumn"/>
+        from my_garden where id=#{id} and created_person_id = #{createdPersonId}
     </select>
 </mapper>

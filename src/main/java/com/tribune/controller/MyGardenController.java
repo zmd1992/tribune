@@ -8,6 +8,7 @@ import com.tribune.util.DateUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -49,9 +50,12 @@ public class MyGardenController {
         String content = request.getParameter("content");
         MyGarden myGarden = new MyGarden();
         myGarden.setContent(content);
+        if (myGarden.getContent().equals("")) {
+        }
         myGarden.setCreatedAt(new Date());
         myGarden.setCreatedPersonId(user.getId());
         myGardenService.pushContent(myGarden);
+
         return "/my/myGarden";
     }
 
@@ -73,19 +77,47 @@ public class MyGardenController {
      * @return
      */
     @RequestMapping(value = "doTotalStation")
-    public String doTatalStation(HttpServletRequest request, Model model) throws ParseException {
+    public String doTatalStation(HttpServletRequest request, Model model) {
+        //查询用户列表
         List<User> userList = userService.findUserList();
         List<Integer> userIdList = new ArrayList<>();
         userList.forEach(x -> {
+            //获取用户ID
             userIdList.add(x.getId());
         });
         model.addAttribute("userList", userList);
-        List<MyGarden> gardenList = myGardenService.findMyGardenContentById(userIdList);
-        gardenList.forEach(x -> {
-            String createdAtStr = DateUtils.dateFormatString(x.getCreatedAt());
-            model.addAttribute("createdAtStr", createdAtStr);
+        //根据用户ID查询全站内容，并获取创建人ID
+//        List<Integer> createdPersonIdList = new ArrayList<>();
+//        List<MyGarden> gardenList = myGardenService.findMyGardenContentById(userIdList);
+//        gardenList.forEach(x -> {
+//            String createdAtStr = DateUtils.dateFormatString(x.getCreatedAt());
+//            model.addAttribute("createdAtStr", createdAtStr);
+//            createdPersonIdList.add(x.getCreatedPersonId());
+//        });
+//        //根据全站内容创建人ID获取用户名称
+//        List<User> list=userService.findUserListByIds(createdPersonIdList);
+//        model.addAttribute("list", list);
+//        model.addAttribute("gardenList", gardenList);
+        //查询全站内容
+        List<MyGarden> myGardenList = myGardenService.findTotalStationContent();
+        //获取创建人ID
+        List<Integer> createdPersonIdList = new ArrayList<>();
+        myGardenList.forEach(x -> {
+            createdPersonIdList.add(x.getCreatedPersonId());
         });
-        model.addAttribute("gardenList", gardenList);
+        List<User> userListByIds = userService.findUserListByIds(createdPersonIdList);
+        List<MyGarden> list = new ArrayList<>();
+        //根据内容ID和创建人ID查询发布内容
+        for (Integer createdPersonId : createdPersonIdList) {
+            for (MyGarden myGarden : myGardenList) {
+                myGarden.setId(myGarden.getId());
+                myGarden.setCreatedPersonId(createdPersonId);
+                myGarden = myGardenService.findMyGardenContentByIds(myGarden);
+                list.add(myGarden);
+            }
+        }
+        model.addAttribute("list", list);
+        model.addAttribute("userListByIds", userListByIds);
         return "/my/totalStation";
     }
 

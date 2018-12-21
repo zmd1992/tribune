@@ -29,4 +29,8 @@ public interface MyGardenService {
      * @return
      */
     public List<MyGarden> findMyGardenContentById(List<Integer> idList);
+    /**
+     * 根据内容ID和创建人ID查询发布内容
+     */
+    public MyGarden findMyGardenContentByIds(MyGarden myGarden);
 }

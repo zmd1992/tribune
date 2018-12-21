@@ -1,8 +1,5 @@
 package com.tribune.pojo;
 
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
-
-import java.sql.Blob;
 import java.util.Date;
 
 

@@ -4,6 +4,7 @@ import com.tribune.mapper.MyGardenMapper;
 import com.tribune.pojo.MyGarden;
 import com.tribune.service.MyGardenService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -31,5 +32,11 @@ public class MyGardenServiceImpl implements MyGardenService {
     @Override
     public List<MyGarden> findMyGardenContentById(List<Integer> idList) {
         return myGardenMapper.selectMyGardenContentById(idList);
+    }
+
+    @Override
+    public MyGarden findMyGardenContentByIds(MyGarden myGarden) {
+        MyGarden myGarden1 = myGardenMapper.selectMyGardenContentByIds(myGarden);
+        return myGarden1;
     }
 }
