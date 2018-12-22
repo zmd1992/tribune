@@ -51,4 +51,9 @@ public class UserServiceImpl implements UserService {
     public User findUserById(Integer id) {
         return userMapper.selectUserById(id);
     }
+
+    @Override
+    public List<User> checkUserNameRepeat(String  userName) {
+        return userMapper.checkUserNameRepeat(userName);
+    }
 }

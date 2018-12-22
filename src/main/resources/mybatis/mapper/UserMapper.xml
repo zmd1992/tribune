@@ -47,5 +47,8 @@
         <include refid="cloumnList"/>
         from user id = #{id}
     </select>
+    <select id="checkUserNameRepeat" parameterType="string" resultType="com.tribune.pojo.User">
+        select <include refid="cloumnList"/> from user where username=#{userName}
+    </select>
 
 </mapper>

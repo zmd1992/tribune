@@ -3,6 +3,7 @@ package com.tribune.controller;
 import com.tribune.pojo.User;
 import com.tribune.service.UserService;
 import com.tribune.util.DateUtils;
+import net.sf.cglib.core.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import javax.swing.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * created by zhangmengdan
@@ -47,11 +49,25 @@ public class UserController {
      * @throws ParseException
      */
     @RequestMapping("registerUser")
-    public String registerUser(HttpServletRequest request) throws ParseException {
+    public ModelAndView registerUser(HttpServletRequest request) throws ParseException {
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        ModelAndView modelAndView=new ModelAndView();
+        if (username.equals("")){
+            return modelAndView=new ModelAndView("/user/userIsNull");
+        }
+        List<User> userList=userService.checkUserNameRepeat(username);
+        if (userList.size()>0&&userList!=null){
+            return   modelAndView=new ModelAndView("/user/checkUsernameRepeat");
+        }
+        String password=request.getParameter("password");
+        if (password.equals("")){
+            return modelAndView=new ModelAndView("/user/passIsNull");
+        }
         String sex = request.getParameter("sex");
         String birthday = request.getParameter("birthday");
+        if (birthday.equals("")){
+            return modelAndView=new ModelAndView("/user/isNotNull");
+        }
         String email = request.getParameter("email");
         String headImg = request.getParameter("headImg");
         User user = new User();
@@ -63,8 +79,11 @@ public class UserController {
         Date birthdayDate = simpleDateFormat.parse(birthday);
         user.setBirthday(birthdayDate);
         user.setEmail(email);
-        userService.addUser(user);
-        return "user/login";
+        int insertUser=userService.addUser(user);
+        if (insertUser==1){
+           return   modelAndView=new ModelAndView("user/login");
+        }
+        return modelAndView;
 
     }
 

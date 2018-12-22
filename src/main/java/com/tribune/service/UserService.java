@@ -44,5 +44,11 @@ public interface UserService {
      */
     public User findUserById(Integer id);
 
+    /**
+     * 根据用户名查询用户名是否重复
+     * @return
+     */
+    public List<User> checkUserNameRepeat(String  userName);
+
 
 }
