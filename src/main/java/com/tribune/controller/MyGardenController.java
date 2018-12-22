@@ -86,18 +86,6 @@ public class MyGardenController {
             userIdList.add(x.getId());
         });
         model.addAttribute("userList", userList);
-        //根据用户ID查询全站内容，并获取创建人ID
-//        List<Integer> createdPersonIdList = new ArrayList<>();
-//        List<MyGarden> gardenList = myGardenService.findMyGardenContentById(userIdList);
-//        gardenList.forEach(x -> {
-//            String createdAtStr = DateUtils.dateFormatString(x.getCreatedAt());
-//            model.addAttribute("createdAtStr", createdAtStr);
-//            createdPersonIdList.add(x.getCreatedPersonId());
-//        });
-//        //根据全站内容创建人ID获取用户名称
-//        List<User> list=userService.findUserListByIds(createdPersonIdList);
-//        model.addAttribute("list", list);
-//        model.addAttribute("gardenList", gardenList);
         //查询全站内容
         List<MyGarden> myGardenList = myGardenService.findTotalStationContent();
         //获取创建人ID
@@ -105,13 +93,14 @@ public class MyGardenController {
         myGardenList.forEach(x -> {
             createdPersonIdList.add(x.getCreatedPersonId());
         });
+        //根据创建人id获取用户信息
         List<User> userListByIds = userService.findUserListByIds(createdPersonIdList);
         List<MyGarden> list = new ArrayList<>();
         //根据内容ID和创建人ID查询发布内容
-        for (Integer createdPersonId : createdPersonIdList) {
+        for (User user : userListByIds) {
             for (MyGarden myGarden : myGardenList) {
                 myGarden.setId(myGarden.getId());
-                myGarden.setCreatedPersonId(createdPersonId);
+                myGarden.setCreatedPersonId(user.getId());
                 myGarden = myGardenService.findMyGardenContentByIds(myGarden);
                 list.add(myGarden);
             }

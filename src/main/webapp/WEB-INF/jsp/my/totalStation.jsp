@@ -8,12 +8,15 @@
 </head>
 <body>
 <table id="tbStation">
-    <c:forEach var="userList" items="${userListByIds}">
-        <c:forEach var="contentList" items="${list}">
+    <c:forEach var="contentList" items="${list}">
+        <c:forEach var="userList" items="${userListByIds}">
             <tr>
                 <td align="right">
                         ${userList.userName}:
                 </td>
+                <td align="left">
+                        ${contentList.createdPersonId}
+                </td align=left>
                 <td align="left">
                         ${contentList.content}
                     <a href="/myGarden/removeMyGardenContent?id=${contentList.id}">${contentList.id}删除</a>
